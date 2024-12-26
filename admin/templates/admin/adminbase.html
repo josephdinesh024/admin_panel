@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Free open source Tailwind CSS Store template">
+    <meta name="keywords" content="tailwind,tailwindcss,tailwind css,css,starter template,free template,store template, shop layout, minimal, monochrome, minimalistic, theme, nordic">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <style>
+    .oswald{
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal; 
+    }
+
+    .bgcolor{
+        background-color: #ddfffd;
+    }
+    .overlay{
+    background-color: black;
+    opacity: 0.9;
+    z-index: 10;
+    display: block;
+    
+}
+        </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="{{url_for('static',filename='css/alert.css')}}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+</head>
+
+
+
+<body class="oswald bg-teal-50 ">
+    <section class="w-full flex flex-col">
+        <header class="w-full bg-white flex justify-center shadow-2xl">
+            <div class="w-11/12">
+                <div class="flex justify-between">
+                    <a href="{{url_for('admins.adminsite')}}"><h1 class="mt-2 p-2 text-4xl">Admin</h1></a>
+                    <div class="flex space-x-4">
+                        <svg class="border border p-1 mt-4 rounded-full" width="34" height="34" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 5.33333C12 4.27246 11.5786 3.25505 10.8284 2.5049C10.0783 1.75476 9.06087 1.33333 8 1.33333C6.93913 1.33333 5.92172 1.75476 5.17157 2.5049C4.42143 3.25505 4 4.27246 4 5.33333C4 10 2 11.3333 2 11.3333H14C14 11.3333 12 10 12 5.33333Z" stroke="black" stroke-width="0.966667" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9.15335 14C9.03614 14.2021 8.86791 14.3698 8.6655 14.4864C8.46309 14.6029 8.2336 14.6643 8.00001 14.6643C7.76643 14.6643 7.53694 14.6029 7.33453 14.4864C7.13212 14.3698 6.96389 14.2021 6.84668 14" stroke="black" stroke-width="0.99997" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <img id="dropdownbutton" class="rounded-full mt-3 w-10 h-10" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACUCAMAAABGFyDbAAAAMFBMVEXk5ueutLepsLPW2dvn6erq7O3e4eKmrbCzubzZ3N23vb/KztC7wMPFycvCxsi+w8W0wiG1AAADfklEQVR4nO2b2XKrMAxAvcgLmOX//7YGkpamCcgCyXfm+kynz2dkWRa2olSj0Wg0Go1Go9FoNBqNRuMS4Jzy1tpOOQe1ZTZA+TTpEIIxJv+Pk/VQXQ0g9droHcbo2daNGfgx/HL6Vkuqnhgk/U5qFYvJVZLqzCepVaz3NQLmxgOnja6C13AUqo0wSntBPJVaFlLYy6Osstcs6eWQVtkryXnBgLWS9IJ0nu07L6k64UOBVcbLaPVlVmaUqPdlS7gQOgEtV2ql9cBvBednzh+M5fdCl6wdPXd2lWfWQuDejPj6vof9bCytWQ8ib7hoa5hhrhGFpfQJ8ypiG5o/RNa92BHXUAdWLUvW4sx5GKlaxjImlyvo/17g7AZpxXSFcys6spWeOLWoqaU15ydQ0yrSIlvx5hbxSNS8O7Hku/UFzrpF7mt4q/yFM5FRKncQRCttWDsIcr81sLaBMBODlTit/tleHmhfPj2vFbHj4r97I+3FwH/zRjh/DOeBuAGUiipwH0joIviDpQjZZUTudEtLqtQVOJRZTSJSpVlvhKwKjyCJa+an14T1CgK3uTsv5GWEsbJPw7h4BdZW+a3Xed6bWOFVGOypldAb1IuXO6qrRteaOFDg9aeuMExVxg0euG54M6Fh9ORrhWpjGfyJvwZaTIipZqS+zZyy49DHuPwNyULdQO0Al6O2oKD+kNTCqpF9uicPt4rzSM5Bl8a5z4u3JtWaYXFZySnZGnNvORg+51N4O7y1KYYQR+slB99ykKY+Hk5JPdx0P+ewCZgBeDuHgk/rtV4wj76B83Ms/iDLQbOMiwk+fTxsTmM2djwhc2r6OAmICtnQ3V9nl5lJutNG6G/uoAHGK5H6Cdl84xEOyp5XAyRhuivFQPV3Seklx+756oDrSfUi1t8RsPnGUD284tWAAfkp/5Bw7bbEJQ6pjBkuxOv2tNoRyY21Q980kLyoxyRiavkSpHi5+7fgK4R40QdE8JTfBjjyg2YJpfsROr49uKN4rIs+tVLmVdTqOO5N+ONVsoTkJ+lyrYJlJD/9UrzQy0gfKyCB3o0iu/AJ9u1FopDuQT4Ye1EpdHbJZpZGzodfmP8jghr+JA5TXwCT9MDVJx+ASHrquMoVEA2OZIV/gtiL5FGoK1rnySV3Su84HaMSPg+fnFUumJffR0tzPk3f2RqcWTUajUaj8b/yBYqKKfZPulcjAAAAAElFTkSuQmCC" alt="">
+                    </div>
+                </div>
+                <div id="dropdownopen" class="absolute right-0 z-5 w-48 mt-2 mr-2 overflow-hidden bg-white rounded-md shadow-xl" style="display: none;">
+                    <a href="{{url_for('mains.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 hover:text-white hover:text-lg hover:shadow-lg duration-500 ">
+                        Home</a>
+                    <a href="{{url_for('sellers.seller_profile')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 hover:text-white hover:text-lg hover:shadow-lg duration-500 ">
+                        Profile</a>
+                    <a href="{{url_for('admins.report')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 hover:text-white hover:text-lg hover:shadow-lg duration-500 ">
+                        Report</a>
+                        {% if current_user.is_authenticated %}
+                    <a href="{{url_for('mains.logout')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 hover:text-white hover:text-lg hover:shadow-lg duration-500 ">
+                        Logout</a>
+                        {% endif %}
+                </div>
+            </div>
+        </header>
+
+        <section class="w-1/6 mt-1 bg-white ">
+            <div class="w-10 h-screen shadow-2xl bg-white fixed py-2">
+                <div  class="space-y-4">
+                    <a href="{{url_for('admins.adminsite')}}" class="relative inline-block mt-4 group">
+                            <svg class="mx-2" width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14.14 10.5933C13.7159 11.5963 13.0525 12.4801 12.2079 13.1675C11.3633 13.8549 10.3632 14.3249 9.29496 14.5365C8.22674 14.7481 7.12295 14.6948 6.0801 14.3812C5.03725 14.0676 4.08709 13.5034 3.31268 12.7378C2.53828 11.9722 1.96321 11.0285 1.63776 9.98929C1.31231 8.95009 1.24638 7.84698 1.44574 6.77641C1.64509 5.70584 2.10367 4.70041 2.78137 3.84801C3.45907 2.99561 4.33526 2.3222 5.33334 1.88666" stroke="black" stroke-width="0.966667" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14.6667 8.00001C14.6667 7.12453 14.4942 6.25762 14.1592 5.44879C13.8242 4.63995 13.3331 3.90502 12.714 3.28597C12.095 2.66691 11.3601 2.17584 10.5512 1.84081C9.74239 1.50578 8.87548 1.33334 8 1.33334V8.00001H14.6667Z" stroke="black" stroke-width="0.966667" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        <div class="w-40 absolute hidden group-hover:block left-10 top-1/2 -mt-4">
+                            <div class="flex space-x-0">
+                                <svg class="mt-1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.86009 8.75255L9.3415 13.5488C9.98808 14.1145 11 13.6554 11 12.7962V3.20375C11 2.34459 9.98808 1.88541 9.3415 2.45117L3.86009 7.2474C3.40476 7.64581 3.40476 8.35414 3.86009 8.75255Z" fill="#828282"/>
+                                </svg>
+                                <span class="bg-gray-700 text-white text-sm rounded px-2 py-1">
+                                    Dashboard
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- <a href="{{url_for('admins.menu')}}" class="relative inline-block mt-4 group">
+                        <svg class="mx-2" width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 10H5C5.55228 10 6 10.4477 6 11V14C6 14.5523 5.55228 15 5 15H2C1.44772 15 1 14.5523 1 14V11C1 10.4477 1.44772 10 2 10ZM11 1H14C14.5523 1 15 1.44772 15 2V5C15 5.55228 14.5523 6 14 6H11C10.4477 6 10 5.55228 10 5V2C10 1.44772 10.4477 1 11 1ZM11 10C10.4477 10 10 10.4477 10 11V14C10 14.5523 10.4477 15 11 15H14C14.5523 15 15 14.5523 15 14V11C15 10.4477 14.5523 10 14 10H11ZM11 0C9.89543 0 9 0.89543 9 2V5C9 6.10457 9.89543 7 11 7H14C15.1046 7 16 6.10457 16 5V2C16 0.895431 15.1046 0 14 0H11ZM2 9C0.895431 9 0 9.89543 0 11V14C0 15.1046 0.89543 16 2 16H5C6.10457 16 7 15.1046 7 14V11C7 9.89543 6.10457 9 5 9H2ZM9 11C9 9.89543 9.89543 9 11 9H14C15.1046 9 16 9.89543 16 11V14C16 15.1046 15.1046 16 14 16H11C9.89543 16 9 15.1046 9 14V11Z" fill="black"/>
+                            <path d="M0 2C0 0.89543 0.895431 0 2 0H5C6.10457 0 7 0.895431 7 2V5C7 6.10457 6.10457 7 5 7H2C0.89543 7 0 6.10457 0 5V2ZM5.35355 2.85355C5.54882 2.65829 5.54882 2.34171 5.35355 2.14645C5.15829 1.95118 4.84171 1.95118 4.64645 2.14645L3 3.79289L2.35355 3.14645C2.15829 2.95118 1.84171 2.95118 1.64645 3.14645C1.45118 3.34171 1.45118 3.65829 1.64645 3.85355L2.64645 4.85355C2.84171 5.04882 3.15829 5.04882 3.35355 4.85355L5.35355 2.85355Z" fill="black"/>
+                        </svg>
+                        <div class="w-40 absolute hidden group-hover:block left-10 top-1/2 -mt-4">
+                            <div class="flex space-x-0">
+                                <svg class="mt-1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.86009 8.75255L9.3415 13.5488C9.98808 14.1145 11 13.6554 11 12.7962V3.20375C11 2.34459 9.98808 1.88541 9.3415 2.45117L3.86009 7.2474C3.40476 7.64581 3.40476 8.35414 3.86009 8.75255Z" fill="#828282"/>
+                                </svg>
+                                <span class="bg-gray-700 text-white text-sm rounded px-2 py-1">
+                                    Menu
+                                </span>
+                            </div>
+                        </div>
+                    </a> -->
+                    <a href="{{url_for('admins.adminsite_seller')}}" class="relative inline-block mt-4 group">
+                        <svg class="mx-2" width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 8C9.65685 8 11 6.65685 11 5C11 3.34315 9.65685 2 8 2C6.34315 2 5 3.34315 5 5C5 6.65685 6.34315 8 8 8ZM10 5C10 6.10457 9.10457 7 8 7C6.89543 7 6 6.10457 6 5C6 3.89543 6.89543 3 8 3C9.10457 3 10 3.89543 10 5Z" fill="black"/>
+                            <path d="M14 13C14 14 13 14 13 14H3C3 14 2 14 2 13C2 12 3 9 8 9C13 9 14 12 14 13ZM13 12.9965C12.9986 12.7497 12.8462 12.0104 12.1679 11.3321C11.5156 10.6798 10.2891 10 7.99999 10C5.71088 10 4.48435 10.6798 3.8321 11.3321C3.15375 12.0104 3.00142 12.7497 3 12.9965H13Z" fill="black"/>
+                        </svg>     
+                        <div class="w-40 absolute hidden group-hover:block left-10 top-1/2 -mt-4">
+                            <div class="flex space-x-0">
+                                <svg class="mt-1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.86009 8.75255L9.3415 13.5488C9.98808 14.1145 11 13.6554 11 12.7962V3.20375C11 2.34459 9.98808 1.88541 9.3415 2.45117L3.86009 7.2474C3.40476 7.64581 3.40476 8.35414 3.86009 8.75255Z" fill="#828282"/>
+                                </svg>
+                                <span class="bg-gray-700 text-white text-sm rounded px-2 py-1">
+                                    Seller
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="{{url_for('admins.adminsite_product')}}" class="relative inline-block mt-4 group">
+                        <svg class="mx-2" width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 1C9.38071 1 10.5 2.11929 10.5 3.5V4H5.5V3.5C5.5 2.11929 6.61929 1 8 1ZM11.5 4V3.5C11.5 1.567 9.933 0 8 0C6.067 0 4.5 1.567 4.5 3.5V4H1V14C1 15.1046 1.89543 16 3 16H13C14.1046 16 15 15.1046 15 14V4H11.5ZM2 5H14V14C14 14.5523 13.5523 15 13 15H3C2.44772 15 2 14.5523 2 14V5Z" fill="black"/>
+                        </svg>
+                            
+                        <div class="w-40 absolute hidden group-hover:block left-10 top-1/2 -mt-4">
+                            <div class="flex space-x-0">
+                                <svg class="mt-1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.86009 8.75255L9.3415 13.5488C9.98808 14.1145 11 13.6554 11 12.7962V3.20375C11 2.34459 9.98808 1.88541 9.3415 2.45117L3.86009 7.2474C3.40476 7.64581 3.40476 8.35414 3.86009 8.75255Z" fill="#828282"/>
+                                </svg>
+                                <span class="bg-gray-700 text-white text-sm rounded px-2 py-1">
+                                    Product
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="{{url_for('admins.cart_price')}}" class="relative inline-block mt-4 group">
+                        <svg width="20" height="20" class="mx-2" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 1.5C0 1.22386 0.223858 1 0.5 1H2C2.22943 1 2.42943 1.15615 2.48507 1.37873L2.89039 3H14.5C14.6498 3 14.7917 3.06716 14.8867 3.18301C14.9816 3.29885 15.0197 3.45117 14.9903 3.59806L13.9903 8.59806C13.9454 8.82257 13.7537 8.9879 13.525 8.99937L4.12822 9.47069L4.41496 11H13C13.2761 11 13.5 11.2239 13.5 11.5C13.5 11.7761 13.2761 12 13 12H12H5H4C3.75939 12 3.55291 11.8286 3.50856 11.5921L2.01131 3.6068L1.60961 2H0.5C0.223858 2 0 1.77614 0 1.5ZM3.10246 4L3.94223 8.47876L13.0861 8.02013L13.8901 4H3.10246ZM5 12C3.89543 12 3 12.8954 3 14C3 15.1046 3.89543 16 5 16C6.10457 16 7 15.1046 7 14C7 12.8954 6.10457 12 5 12ZM12 12C10.8954 12 10 12.8954 10 14C10 15.1046 10.8954 16 12 16C13.1046 16 14 15.1046 14 14C14 12.8954 13.1046 12 12 12ZM5 13C5.55228 13 6 13.4477 6 14C6 14.5523 5.55228 15 5 15C4.44772 15 4 14.5523 4 14C4 13.4477 4.44772 13 5 13ZM12 13C12.5523 13 13 13.4477 13 14C13 14.5523 12.5523 15 12 15C11.4477 15 11 14.5523 11 14C11 13.4477 11.4477 13 12 13Z" fill="black"/>
+                        </svg>
+                        <div class="w-40 absolute hidden group-hover:block left-10 top-1/2 -mt-4">
+                            <div class="flex space-x-0">
+                                <svg class="mt-1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.86009 8.75255L9.3415 13.5488C9.98808 14.1145 11 13.6554 11 12.7962V3.20375C11 2.34459 9.98808 1.88541 9.3415 2.45117L3.86009 7.2474C3.40476 7.64581 3.40476 8.35414 3.86009 8.75255Z" fill="#828282"/>
+                                </svg>
+                                <span class="bg-gray-700 text-white text-sm rounded px-2 py-1">
+                                    Buyer Price
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="{{url_for('admins.sellerprice')}}" class="relative inline-block mt-4 group">
+                        <svg width="20" height="20" class="mx-2" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 3C1 2.44772 1.44772 2 2 2H14C14.5523 2 15 2.44772 15 3L1 3Z" fill="white"/>
+                            <path d="M8 11C9.10457 11 10 10.1046 10 9C10 7.89543 9.10457 7 8 7C6.89543 7 6 7.89543 6 9C6 10.1046 6.89543 11 8 11Z" fill="black"/>
+                            <path d="M0 5C0 4.44772 0.447715 4 1 4H15C15.5523 4 16 4.44772 16 5V13C16 13.5523 15.5523 14 15 14H1C0.447715 14 0 13.5523 0 13V5ZM3 5C3 6.10457 2.10457 7 1 7V11C2.10457 11 3 11.8954 3 13H13C13 11.8954 13.8954 11 15 11V7C13.8954 7 13 6.10457 13 5H3Z" fill="black"/>
+                        </svg>
+                        <div class="w-40 absolute hidden group-hover:block left-10 top-1/2 -mt-4">
+                            <div class="flex space-x-0">
+                                <svg class="mt-1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.86009 8.75255L9.3415 13.5488C9.98808 14.1145 11 13.6554 11 12.7962V3.20375C11 2.34459 9.98808 1.88541 9.3415 2.45117L3.86009 7.2474C3.40476 7.64581 3.40476 8.35414 3.86009 8.75255Z" fill="#828282"/>
+                                </svg>
+                                <span class="bg-gray-700 text-white text-sm rounded px-2 py-1">
+                                    Buyer Price
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="flex justify-end mt-12">
+            <div class="w-11/12">
+                <div class="w-full space-y-4 p-8">
+                    <div class=" flex justify-center">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category,message in messages %}
+                                <div class="container w-1/4 bg-white ">
+                                    <div class="absolute  md:w-auto m-1 p-2 top-20 alert-{{category}} shadow-2xl shadow-green-500/50 text-white rounded-xl flex items-center space-x-4">
+                                        <div class="shrink-0">
+                                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M24.5 13.4167C24.504 14.9565 24.1442 16.4755 23.45 17.85C22.6268 19.497 21.3614 20.8824 19.7954 21.8508C18.2293 22.8193 16.4246 23.3326 14.5833 23.3333C13.0435 23.3374 11.5245 22.9776 10.15 22.2833L3.5 24.5L5.71667 17.85C5.02242 16.4755 4.66265 14.9565 4.66667 13.4167C4.66738 11.5754 5.18071 9.77066 6.14917 8.20464C7.11763 6.63863 8.50296 5.37316 10.15 4.55C11.5245 3.85576 13.0435 3.49599 14.5833 3.5H15.1667C17.5984 3.63416 19.8952 4.66056 21.6173 6.38267C23.3394 8.10479 24.3658 10.4016 24.5 12.8333V13.4167Z" stroke="white" stroke-width="2.666667" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p class="text-slate-500">{{message}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    </div>
+    
+                    <div id="shortmenu" class="mt-4 hidden">
+                        <div class="flex">
+                            <div class="w-full px-6 sm:w-1/2 xl:w-1/3">
+                                <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-xl">
+                                    <a href="{{url_for('admins.adminsite_seller')}}">
+                                    <div class="p-3 bg-indigo-600 bg-opacity-75 rounded-full">
+                                        <svg class="w-8 h-8 text-white" viewBox="0 0 28 30" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M18.2 9.08889C18.2 11.5373 16.3196 13.5222 14 13.5222C11.6804 13.5222 9.79999 11.5373 9.79999 9.08889C9.79999 6.64043 11.6804 4.65556 14 4.65556C16.3196 4.65556 18.2 6.64043 18.2 9.08889Z"
+                                                fill="currentColor"></path>
+                                            <path
+                                                d="M25.2 12.0444C25.2 13.6768 23.9464 15 22.4 15C20.8536 15 19.6 13.6768 19.6 12.0444C19.6 10.4121 20.8536 9.08889 22.4 9.08889C23.9464 9.08889 25.2 10.4121 25.2 12.0444Z"
+                                                fill="currentColor"></path>
+                                            <path
+                                                d="M19.6 22.3889C19.6 19.1243 17.0927 16.4778 14 16.4778C10.9072 16.4778 8.39999 19.1243 8.39999 22.3889V26.8222H19.6V22.3889Z"
+                                                fill="currentColor"></path>
+                                            <path
+                                                d="M8.39999 12.0444C8.39999 13.6768 7.14639 15 5.59999 15C4.05359 15 2.79999 13.6768 2.79999 12.0444C2.79999 10.4121 4.05359 9.08889 5.59999 9.08889C7.14639 9.08889 8.39999 10.4121 8.39999 12.0444Z"
+                                                fill="currentColor"></path>
+                                            <path
+                                                d="M22.4 26.8222V22.3889C22.4 20.8312 22.0195 19.3671 21.351 18.0949C21.6863 18.0039 22.0378 17.9556 22.4 17.9556C24.7197 17.9556 26.6 19.9404 26.6 22.3889V26.8222H22.4Z"
+                                                fill="currentColor"></path>
+                                            <path
+                                                d="M6.64896 18.0949C5.98058 19.3671 5.59999 20.8312 5.59999 22.3889V26.8222H1.39999V22.3889C1.39999 19.9404 3.2804 17.9556 5.59999 17.9556C5.96219 17.9556 6.31367 18.0039 6.64896 18.0949Z"
+                                                fill="currentColor"></path>
+                                        </svg>
+                                    </div></a>
+            
+                                    <div class="mx-5">
+                                        <h4 class="text-2xl font-semibold text-gray-700">{% block seller%} {% endblock %}</h4>
+                                        <div class="text-gray-500">New Users</div>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
+                                <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-xl">
+                                    <a href="{{url_for('admins.adminsite_product')}}">
+                                    <div class="p-3 bg-pink-600 bg-opacity-75 rounded-full">
+                                        <svg class="w-8 h-8 text-white" viewBox="0 0 28 28" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.99998 11.2H21L22.4 23.8H5.59998L6.99998 11.2Z" fill="currentColor"
+                                                stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
+                                            <path
+                                                d="M9.79999 8.4C9.79999 6.08041 11.6804 4.2 14 4.2C16.3196 4.2 18.2 6.08041 18.2 8.4V12.6C18.2 14.9197 16.3196 16.8 14 16.8C11.6804 16.8 9.79999 14.9197 9.79999 12.6V8.4Z"
+                                                stroke="currentColor" stroke-width="2"></path>
+                                        </svg>
+                                    </div></a>
+            
+                                    <div class="mx-5">
+                                        <h4 class="text-2xl font-semibold text-gray-700">{% block product%} {% endblock %}</h4>
+                                        <div class="text-gray-500">Available Products</div> 
+                                    </div>
+                                </div>
+                            </div>
+            
+                        </div>
+                    </div>
+                    
+                    {% block body %} {% endblock %}       
+                    {% block forms %} {% endblock %}
+    
+                </div>
+            </div>
+        </section>
+    </section>
+</body>
+<script>
+    $(document).ready(function(){
+        var url = window.location.pathname;
+        var menu = document.getElementById('shortmenu');
+        if (url == '/admin')
+            menu.style.display = 'block'
+
+        $("#dropdownbutton").click(function(){
+            var div = document.getElementById("dropdownopen");
+            if (div.style.display=='block')
+                div.style.display = "none";
+            else
+                div.style.display = "block";
+            
+        })
+    })
+</script>

@@ -1,0 +1,167 @@
+{% extends 'seller/loginbase.html' %}
+{% block title %} Registration {% endblock %}
+{% block seller %}
+
+                        <form method="post" action="" enctype="multipart/form-data" class="space-y-4">
+                            {{form.hidden_tag()}}
+                        <h1 class="text-4xl text-gray-600">Create a account</h1>
+                        <div class="flex flex-col w-5/6">
+                            {{form.username.label(class="text-gray-400")}}
+                            {{form.username(class="border-2 border-gray-300 rounded-xl p-1 w-full")}}
+                        </div>
+                        <div class="flex flex-col w-5/6">
+                            {{form.email.label(class="text-gray-400")}}
+                            {% if form.email.errors %}
+                                {{form.email(class="border-2 border-red-600 rounded-xl p-1 w-full")}}
+                                {% for error in form.email.errors %}
+                                    <span class="px-1 text-red-600 text-xs">{{error}}</span>
+                                {% endfor %}
+                            {% else %}
+                                {{form.email(class="border-2 border-gray-300 rounded-xl p-1 w-full")}}
+                            {% endif %}
+                        </div>
+                        <div class="flex flex-col w-5/6">
+                            {{form.phone.label(class="text-gray-400")}}
+                            {% if form.phone.errors %}
+                                {{form.phone(class="border-2 border-red-600 rounded-xl p-1 w-full")}}
+                                {% for error in form.phone.errors %}
+                                    <span class="px-1 text-red-600 text-xs">{{error}}</span>
+                                {% endfor %}
+                            {% else %}
+                                {{form.phone(class="border-2 border-gray-300 rounded-xl p-1 w-full")}}
+                            {% endif %}
+                        </div>
+                        <div class="w-5/6 flex flex-row space-x-8">
+                            <div class="w-1/2 flex flex-col">
+                                {{form.password.label(class="text-gray-400")}}
+                                {{form.password(class="border-2 border-gray-300 rounded-xl p-1 w-full")}}
+                            </div>
+                            <div class="w-1/2 flex flex-col">
+                                {{form.conform_password.label(class="text-gray-400")}}
+                                {% if form.conform_password.errors %}
+                                    {{form.conform_password(class="border-2 border-red-600 rounded-xl p-1 w-full")}}
+                                    {% for error in form.conform_password.errors %}
+                                        <span class="px-1 text-red-600 text-xs">{{error}}</span>
+                                    {% endfor %}
+                                {% else %}
+                                    {{form.conform_password(class="border-2 border-gray-300 rounded-xl p-1 w-full")}}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <span class="px-1 text-gray-600 text-xs">Use 8 or more characters with a max of letter, number & symbols</span>
+                        <div class="flex" >
+                            <button id="sellerregisternextbutton" class="bg-gray-500 text-white p-1 px-4 rounded-xl">Next</button>
+                            <span class='text-red-600 text-sm m-2' style="display: none;">fill all field</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hidden absolute w-full top-0 flex justify-center p-32">
+            <div class="bg-white rounded-xl container w-3/6">
+                <div class="border-2 border-gray-300 p-16 rounded-xl shadow-xl z-10">
+                    <div class="flex flex-col space-y-6 ">
+                        <h1 class="text-4xl text-gray-600">Company Details</h1>
+                        <div class="flex flex-col w-5/6">
+                            {{form.factory_name.label(class="text-gray-400")}}
+                            {{form.factory_name(class="border-2 border-gray-300 rounded-xl p-1 w-full")}}
+                        </div>
+                        <div class="flex flex-col w-5/6">
+                            {{form.street.label(class="text-gray-400")}}
+                            {{form.street(class="border-2 border-gray-300 rounded-xl p-1 w-full")}}
+                        </div>
+                        <div class="w-5/6 flex flex-row space-x-6">
+                            <div class="w-1/2 flex flex-col">
+                                {{form.city.label(class="text-gray-400")}}
+                                {{form.city(class="border-2 border-gray-300 rounded-xl p-1 w-full")}}
+                            </div>
+                            <div class="w-1/2 flex flex-col">
+                                {{form.postal_code.label(class="text-gray-400")}}
+                                {{form.postal_code(class="border-2 border-gray-300 rounded-xl p-1 w-full")}}
+                            </div>
+                        </div>
+                        <div class="w-5/6 flex flex-row space-x-6">
+                            <div class="w-1/2 flex flex-col">
+                                {{form.state.label(class="text-gray-400")}}
+                                {{form.state(class="border-2 border-gray-300 rounded-xl p-1 w-full")}}
+                            </div>
+                            <div class="w-1/2 flex flex-col">
+                                {{form.country.label(class="text-gray-400")}}
+                                {{form.country(class="border-2 border-gray-300 rounded-xl p-1 w-full")}}
+                            </div>
+                        </div>
+                        <div class="flex flex-col w-5/6">
+                            <h2 class="text-gray-400">Document</h2>
+                            {% if form.document.errors %}
+                                <label class=" cursor-pointer border-dashed border-2 border-red-300 rounded-xl p-6 w-full">
+                                    {{form.document(class="hidden")}}
+                                    <p id="p" class="text-red-500">Upload File </p>
+                                    {% for error in form.document.errors %}
+                                        <span class="px-1 text-red-600 text-xs">{{error}}</span>
+                                    {% endfor %}
+                                </label>
+                            {% else %}
+                                <label class=" cursor-pointer border-dashed border-2 border-gray-300 rounded-xl p-6 w-full">
+                                    {{form.document(class="hidden")}}
+                                    <p id="p" class="text-gray-400">Upload File </p>
+                                </label>
+                            {% endif %}
+                        </div>
+                        <div class="flex flex-col w-5/6">
+                            {{form.description.label(class="text-gray-400")}}
+                            {{form.description(class="border-2 border-gray-300 rounded-xl p-1 w-full")}}
+                        </div>
+                        <!-- <span class="px-1 text-gray-400 text-xs">Use 8 or more characters with a max of letter, number & symbols</span> -->
+                        <div>
+                            {{form.submit(class="bg-gray-500 text-white p-1 px-4 rounded-xl")}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+<script>
+    $(document).ready(function(){
+        
+        $("#sellerregisternextbutton").click(function(event){
+            event.preventDefault();
+            var div_parent = $("div.relative");
+            var child = div_parent.children();
+            var username = $("#username").val();
+            var email = $("#email").val();
+            var phone = $("#phone").val();
+            var password = $("#password").val();
+            var conform_password = $("#conform_password").val();
+            // var errors = $("<span class='text-red-600 text-sm m-2'></span>").text("fill all field")    (password===conform_password)
+            
+            if(username && email && phone && password && conform_password){
+                child[0].classList.add('hidden')
+                child[1].classList.remove('hidden')
+            }
+            else
+            {
+            var ch=event.target.parentElement.children[1];
+            ch.style.display = 'block';
+            console.log(ch)
+            }
+            // event.target.parentElement.append(errors[0])
+            // console.log(child,username,email,phone,password,conform_password,errors[0])
+        });
+
+        $("#document").change(function(event){
+        var p = document.getElementById('p');
+        var text = "Files Name "
+        var files = event.target.files;
+        for(i=0;i<files.length;i++)
+            text += files[i].name+" ; "
+        p.textContent =text
+
+        });
+        var login = $("button#loginbutton").parent().parent('div');
+        var signin = $("button#signinbutton").parent().parent('div');
+        signin[0].classList.add('bg-blue-500')
+        login[0].classList.remove('bg-blue-500')
+    })
+</script>
+{% endblock %}

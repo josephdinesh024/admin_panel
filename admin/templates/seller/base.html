@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Free open source Tailwind CSS Store template">
+    <meta name="keywords" content="tailwind,tailwindcss,tailwind css,css,starter template,free template,store template, shop layout, minimal, monochrome, minimalistic, theme, nordic">
+    <title>{% block title %} {% endblock %} </title>
+    <link href="{{url_for('static',filename='css/alert.css')}}" rel="stylesheet">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <style>
+    .oswald{
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal; 
+    }
+
+    .bgcolor{
+        background-color: #ddfffd;
+    }
+        </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+</head>
+
+<body class="oswald flex w-full bg-teal-50 ">
+    
+            <header class="w-full flex flex-col justify-items-end space-y-4" >
+                <!-- Header Section -->
+                <div class="relative w-full flex flex-row justify-between">
+                    <!-- <div class="flex space-x-4 mt-4 m-6 p-1 pr-8 border border-green-300 rounded-full">
+                        <svg width="28" height="28" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.33333 12.6667C10.2789 12.6667 12.6667 10.2789 12.6667 7.33333C12.6667 4.38781 10.2789 2 7.33333 2C4.38781 2 2 4.38781 2 7.33333C2 10.2789 4.38781 12.6667 7.33333 12.6667Z" stroke="black" stroke-width="0.666667" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14 14L11.1 11.1" stroke="black" stroke-width="0.666667" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="px-2 pr-6 ">Type to search...</span>
+                    </div> -->
+                    <a href="{{url_for('sellers.seller_home')}}" class="p-4 hover:text-slate-400">
+                        <h1 class="text-4xl">Seller</h1>
+                    </a>
+                    <div class="w-3/6 flex justify-end">
+                        <nav class="flex space-x-6 p-2">
+                            <div class="mt-4">
+                                <svg class="border border-green-300 p-1 rounded-full" width="32" height="32" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 5.33333C12 4.27246 11.5786 3.25505 10.8284 2.5049C10.0783 1.75476 9.06087 1.33333 8 1.33333C6.93913 1.33333 5.92172 1.75476 5.17157 2.5049C4.42143 3.25505 4 4.27246 4 5.33333C4 10 2 11.3333 2 11.3333H14C14 11.3333 12 10 12 5.33333Z" stroke="black" stroke-width="0.966667" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M9.15335 14C9.03614 14.2021 8.86791 14.3698 8.6655 14.4864C8.46309 14.6029 8.2336 14.6643 8.00001 14.6643C7.76643 14.6643 7.53694 14.6029 7.33453 14.4864C7.13212 14.3698 6.96389 14.2021 6.84668 14" stroke="black" stroke-width="0.99997" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+    
+                            <div class="w-fit text-black flex flex-col items-end">
+                                <h1>{{current_user.seller_name}}</h1>
+                                <h3 class="text-gray-400 p-1 ">{{current_user.email_id}} </h3>
+                            </div>
+                            <div class="flex">
+                                <img class="rounded-full w-12 h-12" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACUCAMAAABGFyDbAAAAMFBMVEXk5ueutLepsLPW2dvn6erq7O3e4eKmrbCzubzZ3N23vb/KztC7wMPFycvCxsi+w8W0wiG1AAADfklEQVR4nO2b2XKrMAxAvcgLmOX//7YGkpamCcgCyXfm+kynz2dkWRa2olSj0Wg0Go1Go9FoNBqNRuMS4Jzy1tpOOQe1ZTZA+TTpEIIxJv+Pk/VQXQ0g9droHcbo2daNGfgx/HL6Vkuqnhgk/U5qFYvJVZLqzCepVaz3NQLmxgOnja6C13AUqo0wSntBPJVaFlLYy6Osstcs6eWQVtkryXnBgLWS9IJ0nu07L6k64UOBVcbLaPVlVmaUqPdlS7gQOgEtV2ql9cBvBednzh+M5fdCl6wdPXd2lWfWQuDejPj6vof9bCytWQ8ib7hoa5hhrhGFpfQJ8ypiG5o/RNa92BHXUAdWLUvW4sx5GKlaxjImlyvo/17g7AZpxXSFcys6spWeOLWoqaU15ydQ0yrSIlvx5hbxSNS8O7Hku/UFzrpF7mt4q/yFM5FRKncQRCttWDsIcr81sLaBMBODlTit/tleHmhfPj2vFbHj4r97I+3FwH/zRjh/DOeBuAGUiipwH0joIviDpQjZZUTudEtLqtQVOJRZTSJSpVlvhKwKjyCJa+an14T1CgK3uTsv5GWEsbJPw7h4BdZW+a3Xed6bWOFVGOypldAb1IuXO6qrRteaOFDg9aeuMExVxg0euG54M6Fh9ORrhWpjGfyJvwZaTIipZqS+zZyy49DHuPwNyULdQO0Al6O2oKD+kNTCqpF9uicPt4rzSM5Bl8a5z4u3JtWaYXFZySnZGnNvORg+51N4O7y1KYYQR+slB99ykKY+Hk5JPdx0P+ewCZgBeDuHgk/rtV4wj76B83Ms/iDLQbOMiwk+fTxsTmM2djwhc2r6OAmICtnQ3V9nl5lJutNG6G/uoAHGK5H6Cdl84xEOyp5XAyRhuivFQPV3Seklx+756oDrSfUi1t8RsPnGUD284tWAAfkp/5Bw7bbEJQ6pjBkuxOv2tNoRyY21Q980kLyoxyRiavkSpHi5+7fgK4R40QdE8JTfBjjyg2YJpfsROr49uKN4rIs+tVLmVdTqOO5N+ONVsoTkJ+lyrYJlJD/9UrzQy0gfKyCB3o0iu/AJ9u1FopDuQT4Ye1EpdHbJZpZGzodfmP8jghr+JA5TXwCT9MDVJx+ASHrquMoVEA2OZIV/gtiL5FGoK1rnySV3Su84HaMSPg+fnFUumJffR0tzPk3f2RqcWTUajUaj8b/yBYqKKfZPulcjAAAAAElFTkSuQmCC" alt="profile">
+                                <button id="dropdownbutton">
+                                    <svg class="mt-4 m-1" width="24" height="24" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4 6L8 10L12 6" stroke="black" stroke-width=".966667" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </nav>
+                    </div>
+                    <div id="dropdownopen" class="absolute right-0 top-14 z-5 w-48 mt-2 mr-4 overflow-hidden bg-white rounded-md shadow-xl" style="display: none;">
+                        <a href="{{url_for('mains.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 hover:text-white hover:text-lg hover:shadow-lg duration-500 ">
+                            Home</a>
+                        <a href="{{url_for('sellers.seller_profile')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 hover:text-white hover:text-lg hover:shadow-lg duration-500 ">
+                            Profile</a>
+                            {% if current_user.is_authenticated %}
+                        <a href="{{url_for('mains.logout')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 hover:text-white hover:text-lg hover:shadow-lg duration-500 ">
+                            Logout</a>
+                            {% endif %}
+                    </div>
+                </div>
+            <section class="flex justify-center ">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category,message in messages %}
+                            <!-- <div class="p-15 m-20 border-2 border-radius-4{{ 'bg-green-300 text-sky-600' if category == 'success' else 'bg-red-300 text-blue-600' }}">  -->
+                            <!-- <div class="alert alert-{{category}}">    
+                                {{message}}
+                            </div> -->
+                            <div class="container w-1/6">
+                                <div class="absolute top-14 p-2 alert-{{category}} shadow-2xl text-white rounded-xl flex items-center space-x-4 w-max">
+                                    <div class="shrink-0">
+                                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.5 13.4167C24.504 14.9565 24.1442 16.4755 23.45 17.85C22.6268 19.497 21.3614 20.8824 19.7954 21.8508C18.2293 22.8193 16.4246 23.3326 14.5833 23.3333C13.0435 23.3374 11.5245 22.9776 10.15 22.2833L3.5 24.5L5.71667 17.85C5.02242 16.4755 4.66265 14.9565 4.66667 13.4167C4.66738 11.5754 5.18071 9.77066 6.14917 8.20464C7.11763 6.63863 8.50296 5.37316 10.15 4.55C11.5245 3.85576 13.0435 3.49599 14.5833 3.5H15.1667C17.5984 3.63416 19.8952 4.66056 21.6173 6.38267C23.3394 8.10479 24.3658 10.4016 24.5 12.8333V13.4167Z" stroke="white" stroke-width="2.666667" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-indigo-600 text-xl">{{message}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </section>
+            {% block body %} {% endblock %}
+            {% block profile %} {% endblock %}
+            </header>
+            
+
+<script>
+    $(document).ready(function(){
+        $("button#dropdownbutton").click(function(){
+            var div = document.getElementById("dropdownopen");
+            if (div.style.display=='block')
+                div.style.display = "none";
+            else
+                div.style.display = "block";
+            
+        })
+    })
+</script>
+</body>

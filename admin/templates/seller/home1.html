@@ -1,0 +1,42 @@
+{% extends 'seller/base.html' %}
+{% block title %} Seller Home {% endblock %}
+{% block body %}
+{% if products %}
+<section class="flex justify-center ">
+    <div class="container w-5/6">
+        <div class="w-full p-14 bg-white rounded-xl shadow-xl flex flex-col space-y-6">
+            <h1 class="text-4xl ">Product</h1>
+            <div class="flex justify-end space-x-4">
+                <input type="search" placeholder="search" class="p-1 px-2 border border-gray-300 bg-gray-100 rounded-xl">
+                <div class="w-1/6 bg-gray-100 border border-gray-300 rounded-xl text-gray-400 p-1 px-2">
+                    sort by :
+                    <select class="w-fit bg-gray-100">
+                        <option>Name</option>
+                    </select>
+                </div>
+            </div>
+            <div class="w-full grid justify-items-center">
+                <div class="w-5/6 flex justify-between my-4 px-4 text-gray-400 text-lg">
+                    <h2 class="w-1/6">Category Name</h2>
+                    <h2 class="w-1/6">Product Name</h2>
+                    <h2 class="w-1/6">Stock Quantity</h2>
+                    <h2 class="w-1/6">Product Price</h2>
+                    <h2 class="w-1/6">Status</h2>
+                    <!-- <h2>Action</h2> -->
+                </div>
+                {% for product in products %}
+                    <div class="w-5/6 flex justify-around py-4 text-black text-m border border-gray-300 rounded-xl">
+                        <h2 class="w-1/6">{{product.category.category_name}}</h2>
+                        <h2 class="w-1/6">{{product.product_name}}</h2>
+                        <h2 class="w-1/6">{{product.product_quantity}}</h2>
+                        <h2 class="w-1/6">{{product.product_price}}</h2>
+                        <h2 class="w-1/6 {{ 'text-green-600' if product.approved_status=='approved' else 'text-yellow-500' }} p-1 text-xs rounded-lg ">{{product.approved_status}}</h2>
+                        <!-- <a href="{{url_for('products.updateitem',productid=product.product_id)}}"><span class="text-blue-400 text-sm flex items-center pr-2">update</span></a> -->
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

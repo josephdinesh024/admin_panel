@@ -1,0 +1,126 @@
+{% extends 'admin/adminbase.html' %}
+
+{% block body %}
+<section>
+    <div>
+        <div class="grid grid-cols-3 gap-6">
+            
+            <div class="w-full px-6 sm:w-1/2 xl:w-2/3">
+                <div class=" flex items-center px-5 py-6 bg-white rounded-md shadow-xl">
+                    <a href="{{url_for('admins.adminsite_seller')}}">
+
+                        <div class="p-3 bg-indigo-600 bg-opacity-75 rounded-full">
+                            <svg class="w-8 h-8 text-white" viewBox="0 0 28 30" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M18.2 9.08889C18.2 11.5373 16.3196 13.5222 14 13.5222C11.6804 13.5222 9.79999 11.5373 9.79999 9.08889C9.79999 6.64043 11.6804 4.65556 14 4.65556C16.3196 4.65556 18.2 6.64043 18.2 9.08889Z"
+                                    fill="currentColor"></path>
+                                <path
+                                    d="M25.2 12.0444C25.2 13.6768 23.9464 15 22.4 15C20.8536 15 19.6 13.6768 19.6 12.0444C19.6 10.4121 20.8536 9.08889 22.4 9.08889C23.9464 9.08889 25.2 10.4121 25.2 12.0444Z"
+                                    fill="currentColor"></path>
+                                <path
+                                    d="M19.6 22.3889C19.6 19.1243 17.0927 16.4778 14 16.4778C10.9072 16.4778 8.39999 19.1243 8.39999 22.3889V26.8222H19.6V22.3889Z"
+                                    fill="currentColor"></path>
+                                <path
+                                    d="M8.39999 12.0444C8.39999 13.6768 7.14639 15 5.59999 15C4.05359 15 2.79999 13.6768 2.79999 12.0444C2.79999 10.4121 4.05359 9.08889 5.59999 9.08889C7.14639 9.08889 8.39999 10.4121 8.39999 12.0444Z"
+                                    fill="currentColor"></path>
+                                <path
+                                    d="M22.4 26.8222V22.3889C22.4 20.8312 22.0195 19.3671 21.351 18.0949C21.6863 18.0039 22.0378 17.9556 22.4 17.9556C24.7197 17.9556 26.6 19.9404 26.6 22.3889V26.8222H22.4Z"
+                                    fill="currentColor"></path>
+                                <path
+                                    d="M6.64896 18.0949C5.98058 19.3671 5.59999 20.8312 5.59999 22.3889V26.8222H1.39999V22.3889C1.39999 19.9404 3.2804 17.9556 5.59999 17.9556C5.96219 17.9556 6.31367 18.0039 6.64896 18.0949Z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </div>
+                    </a>
+                    <div class="mx-5">
+                        <h4 class="text-2xl font-semibold text-gray-700"></h4>
+                        <div class="text-gray-500">Seller</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="w-full px-6 sm:w-1/2 xl:w-2/3">
+                <div class=" flex items-center px-5 py-6 bg-white rounded-md shadow-xl">
+                    <a href="{{url_for('admins.adminsite_product')}}">
+
+                        <div class="p-3 bg-indigo-600 bg-opacity-75 rounded-full">
+                            <svg class="w-8 h-8 text-white" viewBox="0 0 28 28" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.99998 11.2H21L22.4 23.8H5.59998L6.99998 11.2Z" fill="currentColor"
+                                    stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
+                                <path
+                                    d="M9.79999 8.4C9.79999 6.08041 11.6804 4.2 14 4.2C16.3196 4.2 18.2 6.08041 18.2 8.4V12.6C18.2 14.9197 16.3196 16.8 14 16.8C11.6804 16.8 9.79999 14.9197 9.79999 12.6V8.4Z"
+                                    stroke="currentColor" stroke-width="2"></path>
+                            </svg>
+                        </div>
+                    </a>
+                    <div class="mx-5">
+                        <h4 class="text-2xl font-semibold text-gray-700"></h4>
+                        <div class="text-gray-500">Product</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="w-full px-6 sm:w-1/2 xl:w-2/3">
+                <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-xl">
+                    <a href="{{url_for('admins.cart_price')}}">
+
+                        <div class="p-3 bg-indigo-600 bg-opacity-75 rounded-full">
+                            <svg width="28" height="28" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 0.5C0 0.223858 0.223858 0 0.5 0H2C2.22943 0 2.42943 0.156149 2.48507 0.378732L2.89039 2H14.5C14.6487 2 14.7898 2.06622 14.8848 2.18068C14.9797 2.29514 15.0188 2.44595 14.9914 2.59214L13.4914 10.5921C13.4471 10.8286 13.2406 11 13 11H12H5H4C3.75939 11 3.55291 10.8286 3.50856 10.5921L2.01131 2.6068L1.60961 1H0.5C0.223858 1 0 0.776142 0 0.5ZM5 11C3.89543 11 3 11.8954 3 13C3 14.1046 3.89543 15 5 15C6.10457 15 7 14.1046 7 13C7 11.8954 6.10457 11 5 11ZM12 11C10.8954 11 10 11.8954 10 13C10 14.1046 10.8954 15 12 15C13.1046 15 14 14.1046 14 13C14 11.8954 13.1046 11 12 11ZM5 12C5.55228 12 6 12.4477 6 13C6 13.5523 5.55228 14 5 14C4.44772 14 4 13.5523 4 13C4 12.4477 4.44772 12 5 12ZM12 12C12.5523 12 13 12.4477 13 13C13 13.5523 12.5523 14 12 14C11.4477 14 11 13.5523 11 13C11 12.4477 11.4477 12 12 12Z" fill="white"/>
+                            </svg>
+                        </div>
+                    </a>
+                    <div class="mx-5">
+                        <h4 class="text-2xl font-semibold text-gray-700"></h4>
+                        <div class="text-gray-500">Cart Price</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="w-full px-6 sm:w-1/2 xl:w-2/3">
+                <div class=" flex items-center px-5 py-6 bg-white rounded-md shadow-xl">
+                    <a href="{{url_for('admins.sellerprice')}}">
+
+                        <div class="p-3 bg-indigo-600 bg-opacity-75 rounded-full">
+                            <svg width="28" height="28" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 3C1 2.44772 1.44772 2 2 2H14C14.5523 2 15 2.44772 15 3L1 3Z" fill="white"/>
+                                <path d="M8 11C9.10457 11 10 10.1046 10 9C10 7.89543 9.10457 7 8 7C6.89543 7 6 7.89543 6 9C6 10.1046 6.89543 11 8 11Z" fill="white"/>
+                                <path d="M0 5C0 4.44772 0.447715 4 1 4H15C15.5523 4 16 4.44772 16 5V13C16 13.5523 15.5523 14 15 14H1C0.447715 14 0 13.5523 0 13V5ZM3 5C3 6.10457 2.10457 7 1 7V11C2.10457 11 3 11.8954 3 13H13C13 11.8954 13.8954 11 15 11V7C13.8954 7 13 6.10457 13 5H3Z" fill="white"/>
+                            </svg>
+                        </div>
+                    </a>
+                    <div class="mx-5">
+                        <h4 class="text-2xl font-semibold text-gray-700"></h4>
+                        <div class="text-gray-500">Seller Price</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="w-full px-6 sm:w-1/2 xl:w-2/3">
+                <div class=" flex items-center px-5 py-6 bg-white rounded-md shadow-xl">
+                    <a href="{{url_for('admins.category')}}">
+
+                        <div class="p-3 bg-indigo-600 bg-opacity-75 rounded-full">
+                            <svg width="28" height="28" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M4 0H12C13.1046 0 14 0.89543 14 2V14C14 15.1046 13.1046 16 12 16H4C2.89543 16 2 15.1046 2 14V2C2 0.89543 2.89543 0 4 0Z" fill="white"/>
+                                <path d="M5 4C4.72386 4 4.5 4.22386 4.5 4.5C4.5 4.77614 4.72386 5 5 5H11C11.2761 5 11.5 4.77614 11.5 4.5C11.5 4.22386 11.2761 4 11 4H5Z" fill="black"/>
+                                <path d="M4.5 6.5C4.5 6.22386 4.72386 6 5 6H11C11.2761 6 11.5 6.22386 11.5 6.5C11.5 6.77614 11.2761 7 11 7H5C4.72386 7 4.5 6.77614 4.5 6.5Z" fill="black"/>
+                                <path d="M5 8C4.72386 8 4.5 8.22386 4.5 8.5C4.5 8.77614 4.72386 9 5 9H11C11.2761 9 11.5 8.77614 11.5 8.5C11.5 8.22386 11.2761 8 11 8H5Z" fill="black"/>
+                                <path d="M5 10C4.72386 10 4.5 10.2239 4.5 10.5C4.5 10.7761 4.72386 11 5 11H8C8.27614 11 8.5 10.7761 8.5 10.5C8.5 10.2239 8.27614 10 8 10H5Z" fill="black"/>
+                                <path d="M2 2C2 0.89543 2.89543 0 4 0H12C13.1046 0 14 0.89543 14 2V14C14 15.1046 13.1046 16 12 16H4C2.89543 16 2 15.1046 2 14V2ZM12 1H4C3.44772 1 3 1.44772 3 2V14C3 14.5523 3.44772 15 4 15H12C12.5523 15 13 14.5523 13 14V2C13 1.44772 12.5523 1 12 1Z" fill="black"/>
+                            </svg>
+                        </div>
+                    </a>
+                    <div class="mx-5">
+                        <h4 class="text-2xl font-semibold text-gray-700"></h4>
+                        <div class="text-gray-500">Category</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

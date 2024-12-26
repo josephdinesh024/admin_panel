@@ -1,0 +1,107 @@
+{% extends 'seller/base.html' %}
+
+{% block body %}
+
+<form method="post" action="" enctype="multipart/form-data">
+    <div id="sellerform" class="hidden:block">
+        {{form.hidden_tag()}}
+        <div>
+            {{form.username.label}}
+            {{form.username(class="border-2 border-gray-600 m-2")}}
+        </div>
+        <div>
+            {{form.email.label}}
+            {% if form.email.errors %}
+                {{form.email(class="border-2 border-red-600 m-2")}}
+                {% for error in form.email.errors %}
+                    <span class="text-red-600">{{error}}</span>
+                {% endfor %}
+            {% else %}
+            {{form.email(class="border-2 border-gray-600 m-2")}}
+            {% endif %}
+        </div>
+        <div>
+            {{form.phone.label}}
+            {% if form.phone.errors %}
+                {{form.phone(class="border-2 border-red-600 m-2")}}
+                {% for error in form.phone.errors %}
+                    <span class="text-red-600">{{error}}</span>
+                {% endfor %}
+            {% else %}
+            {{form.phone(class="border-2 border-gray-600 m-2")}}
+            {% endif %}
+        </div>
+        <div>
+            {{form.password.label}}
+            {{form.password(class="border-2 border-gray-600 m-2")}}
+        </div>
+        <div>
+            {{form.conform_password.label}}      
+            {% if form.conform_password.errors %}
+                {{form.conform_password(class="border-2 border-red-600 m-2")}}
+                {% for error in form.conform_password.errors %}
+                    <span class="text-red-600"> {{error}} </span>
+                {% endfor %}
+            {% else %}
+                {{form.conform_password(class="border-2 border-gray-600 m-2")}}
+            {% endif %}
+        </div>
+        <!-- <div>
+            {{form.submit}}
+        </div> -->
+    </div>
+    <div>
+        {{ form.hidden_tag() }}
+        <div>
+            {{form.factory_name.label}}
+            {{form.factory_name(class="border-2 border-gray-600 m-2")}}
+        </div>
+        <div>
+            {{form.street.label}}
+            {{form.street(class="border-2 border-gray-600 m-2")}}
+        </div>
+        <div>
+            {{form.city.label}}
+            {{form.city(class="border-2 border-gray-600 m-2")}}
+        </div>
+        <div>
+            {{form.state.label}}
+            {{form.state(class="border-2 border-gray-600 m-2")}}
+        </div>
+        <div>
+            {{form.postal_code.label}}
+            {{form.postal_code(class="border-2 border-gray-600 m-2")}}
+        </div>
+        <div>
+            {{form.country.label}}
+            {{form.country(class="border-2 border-gray-600 m-2")}}
+        </div>
+        <div>
+            {{form.document.label}}
+            {{form.document(class="border-2 border-gray-600 m-2")}}
+        </div>
+        <div>
+            
+            {{form.description.label}}
+            {{form.description(class="border-2 border-gray-600 m-2")}}
+        </div>
+        <div>
+            {{form.submit}}
+        </div>
+    </div>
+
+    
+</form>
+<!-- <script>
+    $(document).ready(function(){
+        $("#submit").click(function(event){
+            console.log("click")
+            event.preventDefault();
+            var form = document.getElementById('sellerform');
+            form.style.display = "none";
+            var form = document.getElementById('addresform');
+            form.style.display = "block";
+        })
+    })
+</script> -->
+{% endblock %}

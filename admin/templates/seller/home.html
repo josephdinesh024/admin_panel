@@ -1,0 +1,75 @@
+{% extends 'seller/base.html' %}
+{% block title %} Seller Home {% endblock %}
+{% block body %}
+{% if products %}
+<section class="flex justify-center ">
+    <div class="container w-5/6">
+        <div class="w-full p-14 bg-white rounded-xl shadow-xl flex flex-col space-y-2">
+            <a href="{{url_for('products.newitem')}}" class="p-4 w-fit hover:text-slate-400 shadow hover:shadow-2xl rounded-xl bg-violet-500">
+                <div class="flex space-x-2">
+                    <svg width="24" height="24" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 3.33334V12.6667" stroke="white" stroke-width="2.666667" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3.33331 8H12.6666" stroke="white" stroke-width="2.666667" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h2 class="text-white">New items</h2>
+                </div>
+            </a>
+            <div class="flex justify-end space-x-4">
+                <div class="flex border border-gray-300 bg-gray-100 rounded-xl">
+                    <svg class="mt-2 ml-2" width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.33333 12.6667C10.2789 12.6667 12.6667 10.2789 12.6667 7.33333C12.6667 4.38781 10.2789 2 7.33333 2C4.38781 2 2 4.38781 2 7.33333C2 10.2789 4.38781 12.6667 7.33333 12.6667Z" stroke="black" stroke-width="0.966667" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 14L11.1 11.1" stroke="black" stroke-width="0.966667" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <input type="search" placeholder="search" class="p-1 px-2 bg-gray-100 rounded-xl focus:outline-none">
+                </div>
+                <div class="w-1/6 bg-gray-100 border border-gray-300 rounded-xl text-gray-400 p-1 px-2 ">
+                    sort by :
+                    <select class="selection w-fit bg-gray-100 text-sm focus:outline-none">
+                        <option  class="selectedoption bg-white text-black " value="product_ascending">product name ↑</option>
+                        <option  class="selectedoption bg-white text-black " value="product_decending">product name ↓</option>
+                        <option  class="selectedoption bg-white text-black " value="price_ascending">price ↑</option>
+                        <option  class="selectedoption bg-white text-black " value="price_decending">price ↓</option>
+                        <option  class="selectedoption bg-white text-black " value="status_approved">status ✓</option>
+                        <option  class="selectedoption bg-white text-black " value="status_pending">status X</option>
+                    </select>
+                </div>
+            </div>
+            <div class="w-full divide-y divide-black mt-4">
+                <div class="w-full flex justify-between my-4 px-4 text-gray-700 text-lg capitalize">
+                    <h2 class="w-1/6">Category Name</h2>
+                    <h2 class="w-1/6">Product Name</h2>
+                    <h2 class="w-1/6">Stock Quantity</h2>
+                    <h2 class="w-1/6">Product Price</h2>
+                    <h2 class="w-1/6">Status</h2>
+                    <h2>Action</h2>
+                </div>
+                {% for product in products %}
+                    <div class="w-full flex justify-around py-4 text-gray-500 text-m capitalize">
+                        <h2 class="w-1/6">{{product.category.category_name}}</h2>
+                        <h2 class="w-1/6">{{product.product_name}}</h2>
+                        <h2 class="w-1/6">{{product.product_quantity}}</h2>
+                        <h2 class="w-1/6">{{product.product_price}}</h2>
+                        <h2 class="w-1/6 {{ 'text-green-600' if product.approved_status=='approved' else 'text-yellow-500' if product.approved_status=='pending' else 'text-indigo-500' }} p-1 text-xs rounded-lg ">{{product.approved_status}}</h2>
+                        <a {{ "href=updateitem/%s"|format(product.product_id) if product.approved_status =='approved' else '' }}><span class="text-blue-400 text-sm flex items-center pr-2 underline">update</span></a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+<script>
+    $(document).ready(function(){
+        var select =  $(".selection").children();
+        select[Number("{{selected}}")].setAttribute("selected",true)
+        $(".selection").change(function(){
+            var option_value = $(this).val();
+            if(option_value==='product_ascending'){
+                location.replace("{{url_for('sellers.seller_home')}}")
+            }
+            else
+            location.replace("/get_"+option_value)
+        })
+    })
+</script>
+{% endblock %}
