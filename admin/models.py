@@ -3,7 +3,7 @@ from admin import db,login_manager, app
 import uuid
 from sqlalchemy.dialects.postgresql import UUID
 from flask_login import UserMixin
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from itsdangerous import URLSafeTimedSerializer as Serializer
 
 @login_manager.user_loader
 def load_user(id):
@@ -100,7 +100,7 @@ class Seller(db.Model,UserMixin):
     
     def reset_token(self,times=1800):
         otp = random.randint(1000,9999)
-        s = Serializer(app.config['SECRET_KEY'],times)
+        s = Serializer(app.config['SECRET_KEY'])
         return s.dumps({'sellerid':str(self.seller_id),'otp':otp}).decode('utf-8')
     
     @staticmethod
