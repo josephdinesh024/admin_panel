@@ -1,4 +1,4 @@
-import random
+import random, uuid
 from flask import Blueprint,render_template,redirect,url_for,flash,request
 from flask_login import login_user, current_user, login_required
 from admin import bcrypt, db, app
@@ -77,7 +77,7 @@ def otp_verify(token,id):
     error = ''
     email = ''
     
-    seller = Seller.query.filter_by(seller_id=id).first()
+    seller = Seller.query.filter_by(seller_id=uuid.UUID(id)).first()
     print(id,type(id),seller)
     try:
         data= s.loads(token)

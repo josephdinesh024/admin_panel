@@ -5,6 +5,7 @@ from flask_wtf.file import MultipleFileField, FileAllowed
 from wtforms import StringField, TextAreaField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Length, ValidationError
 from admin.models import Category
+import uuid
 
 
 class ProductForm(FlaskForm):
@@ -18,7 +19,7 @@ class ProductForm(FlaskForm):
 
     def validate_category_id(self,category_id):       
         try:
-            category = Category.query.filter_by(category_id=category_id.data).first()
+            category = Category.query.filter_by(category_id=uuid.UUID(category_id.data)).first()
         except:
             raise ValidationError("Invalid category. It should not be None")
         

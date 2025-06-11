@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import current_user, logout_user, login_required
 from admin import db
 from admin.models import Category, Product, User
@@ -31,8 +31,12 @@ def category():
 @main.route("/categorylist")
 def category_list():
     category_id = request.args.get('category_id','0',str)
-    products = Product.query.filter_by(category_id=category_id,status='approved')
-    return render_template("category_list.html",products=products)
+    try:
+        products = Product.query.filter_by(category_id=category_id,approved_status='approved').all()
+        return render_template("category_list.html",products=products)
+    except:
+        flash(f"No data found",'warning')
+        return redirect("category")
 
 @main.route("/buyform",methods=['GET','POST'])
 @login_required

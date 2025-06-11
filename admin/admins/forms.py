@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+import uuid
 from wtforms import StringField, EmailField, PasswordField, SubmitField, SelectField, IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from admin.models import Admin, Category, SellerPriceList
@@ -32,10 +33,10 @@ class SellerPriceForm(FlaskForm):
     price = IntegerField('Product Price',validators=[DataRequired()])
     submit = SubmitField('Add Price')
 
-    def validate_category(self,category):  
-        print(category.data)     
+    def validate_category(self,category):   
+
         try:
-            Category.query.filter_by(category_id=category.data).first()
+            Category.query.filter_by(category_id=uuid.UUID(category.data)).first()
         except:
             raise ValidationError("Invalid category")
     

@@ -4,7 +4,7 @@ from admin import db
 from admin.models import Product, Category, SellerPriceList
 from admin.products.forms import ProductForm, ProductUpdateForm
 from admin.products.utils import save_product
-
+import uuid
 
 product = Blueprint('products',__name__)
 
@@ -21,9 +21,9 @@ def newitem():
             for data in images:
                 path = save_product(data)
                 image_file.append(path)
-            product_name = SellerPriceList.query.filter_by(id=form.product_name.data).first()
-            product = Product(category_id=form.category_id.data,seller_id=current_user.seller_id,product_name=product_name.product_name,product_price=form.price.data,
-                              product_description=form.description.data,product_quantity=form.quantity.data,product_images=image_file)
+            product_name = SellerPriceList.query.filter_by(id=uuid.UUID(form.product_name.data)).first()
+            product = Product(category_id=uuid.UUID(form.category_id.data), seller_id= current_user.seller_id, product_name=product_name.product_name,product_price=product_name.price,
+                              product_description=form.description.data,product_quantity=form.quantity.data,product_images=",".join(image_file))
             db.session.add(product)
             db.session.commit()
             flash("Your product request is success wait to your card",'success')
@@ -34,13 +34,13 @@ def newitem():
 
 @product.route('/get_product/<id>',methods=['GET'])
 def sellerproduct(id):
-     sellerprice = SellerPriceList.query.filter_by(category_id=id).all()
+     sellerprice = SellerPriceList.query.filter_by(category_id=uuid.UUID(id)).all()
      data = { str(i.id):i.product_name for i in sellerprice }
      return jsonify(data)
 
 @product.route('/get_price/<id>',methods=['GET'])
 def sellerprice(id):
-     sellerprice = SellerPriceList.query.filter_by(id=id).first()
+     sellerprice = SellerPriceList.query.filter_by(id=uuid.UUID(id)).first()
      return jsonify({'price':sellerprice.price,})
 
 
@@ -48,7 +48,7 @@ def sellerprice(id):
 @login_required
 def updateitem(productid):
     form = ProductUpdateForm()
-    editproduct = Product.query.filter_by(product_id=productid).first()
+    editproduct = Product.query.filter_by(product_id=uuid.UUID(productid)).first()
     if form.validate_on_submit():
         # editproduct.product_name =form.product_name.data
         # editproduct.product_price =form.price.data

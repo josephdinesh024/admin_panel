@@ -5,6 +5,7 @@ from admin import bcrypt, db
 from admin.models import Admin, Seller, Product, Category, SellerPriceList, BuyerPriceList
 from admin.admins.forms import LoginFrom, NewAdminFrom, CategoryForm, SellerPriceForm, UpdateSellerPriceForm
 from admin.admins.utils import save_product, create_pdf
+import uuid
 
 
 admin = Blueprint('admins',__name__)
@@ -75,7 +76,7 @@ def adminsite_product():
         return redirect(url_for('seller.home'))
     sellerid = request.args.get('sellerid')
     if sellerid:
-        productrequest = Product.query.filter_by(seller_id=sellerid)
+        productrequest = Product.query.filter_by(seller_id=uuid.UUID(sellerid))
     else:
         # print(datetime.datetime.now())
         productrequest = Product.query.all()  
@@ -89,8 +90,8 @@ def requestform():
     else:
         request_id = request.args.get('request_id')
         action = request.args.get('action')
-        if Seller.query.filter_by(seller_id=request_id).first():
-            request_data = Seller.query.filter_by(seller_id=request_id).first()
+        if Seller.query.filter_by(seller_id=uuid.UUID(request_id)).first():
+            request_data = Seller.query.filter_by(seller_id=uuid.UUID(request_id)).first()
             if action == 'approve':
                 request_data.approved_status = 'approved'
                 request_data.admin_id = current_user.admin_id
@@ -102,7 +103,7 @@ def requestform():
                 db.session.commit()
                 return redirect(url_for('admins.adminsite'))
         else:
-            request_data = Product.query.filter_by(product_id=request_id).first()
+            request_data = Product.query.filter_by(product_id=uuid.UUID(request_id)).first()
 
             if action == 'approve':
                 request_data.approved_status = 'approved'
@@ -128,9 +129,9 @@ def update_product(id):
             path = save_product(img)
             image_list.append(path)
     print(image_list)
-    product = Product.query.filter_by(product_id=id).first()
+    product = Product.query.filter_by(product_id=uuid.UUID(id)).first()
     product.product_description = product_discription
-    product.product_images = image_list
+    product.product_images = ",".join(image_list)
     db.session.commit()
     flash("Product Updated",'success')
     print(id)
@@ -160,7 +161,7 @@ def sellerprice():
     if action=='update':
         print('method get')
         update_price = request.args.get('update_price')
-        price = SellerPriceList.query.filter_by(id=update_price).first()
+        price = SellerPriceList.query.filter_by(id=uuid.UUID(update_price)).first()
         form = UpdateSellerPriceForm()
         form.category.data = price.category.category_name
         form.name.data = price.product_name
@@ -175,7 +176,7 @@ def sellerprice():
         form = SellerPriceForm()
         form.category.choices = [('000','None')]+[(i.category_id,i.category_name)for i in Category.query.all()]
         if form.validate_on_submit():
-            new_price = SellerPriceList(category_id=form.category.data,product_name=form.name.data,
+            new_price = SellerPriceList(category_id=uuid.UUID(form.category.data),product_name=form.name.data,
                                         price=form.price.data,admin_id=current_user.admin_id)
             db.session.add(new_price)
             db.session.commit()
@@ -192,14 +193,14 @@ def cart_price():
     form = request.form
     print(form)
     if product_id and form:
-        cart_price = BuyerPriceList.query.filter_by(product_id=product_id).first()
+        cart_price = BuyerPriceList.query.filter_by(product_id=uuid.UUID(product_id)).first()
         if cart_price:
             print(cart_price.price)
             cart_price.price = form.get('cart_price',type=int)
             flash('Cart price updated','success')
         else:
-            selected_product = Product.query.filter_by(product_id=product_id).first()
-            new_price = BuyerPriceList(product_id=product_id,product_name=selected_product.product_name,price=form.get('cart_price',type=int))
+            selected_product = Product.query.filter_by(product_id=uuid.UUID(product_id)).first()
+            new_price = BuyerPriceList(product_id=uuid.UUID(product_id),product_name=selected_product.product_name,price=form.get('cart_price',type=int))
             db.session.add(new_price)
             flash('New Cart price added','success')
         db.session.commit()
@@ -208,7 +209,7 @@ def cart_price():
 
 @admin.route('/edit_cart_price/<id>')
 def edit_cart_price(id):
-    product = Product.query.filter_by(product_id=id).first()
+    product = Product.query.filter_by(product_id=uuid.UUID(id)).first()
     price = product.cart_price[0].price if product.cart_price else 0
     data = {'name':product.product_name,
             'price':round(price)}

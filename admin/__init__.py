@@ -7,8 +7,11 @@ from flask_migrate import Migrate
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = '323jjvfhiKISHDIH38u0HBIW3DIHbhsdbihidi'
-DB_URL = 'postgresql://{user}:{pw}@{url}/{db}'.format(user='postgres',pw='Victus',url='localhost',db='admindb')
-DB_URL2 = 'postgresql://{user}:{pw}@{url}/{db}'.format(user='postgres',pw='Victus',url='localhost',db='testdb')
+# DB_URL = 'postgresql://{user}:{pw}@{url}/{db}'.format(user='postgres',pw='Victus',url='localhost',db='admindb')
+# DB_URL2 = 'postgresql://{user}:{pw}@{url}/{db}'.format(user='postgres',pw='Victus',url='localhost',db='testdb')
+DB_URL = 'sqlite:///admindb.db'
+DB_URL2 = 'sqlite:///datadb.db'
+
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
 app.config['SQLALCHEMY_BINDS'] = {
     'testdb': DB_URL2  # Secondary database

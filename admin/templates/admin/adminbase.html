@@ -53,8 +53,8 @@
                 <div id="dropdownopen" class="absolute right-0 z-5 w-48 mt-2 mr-2 overflow-hidden bg-white rounded-md shadow-xl" style="display: none;">
                     <a href="{{url_for('mains.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 hover:text-white hover:text-lg hover:shadow-lg duration-500 ">
                         Home</a>
-                    <a href="{{url_for('sellers.seller_profile')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 hover:text-white hover:text-lg hover:shadow-lg duration-500 ">
-                        Profile</a>
+                    <!-- <a href="{{url_for('admins.admin_profile')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 hover:text-white hover:text-lg hover:shadow-lg duration-500 ">
+                        Profile</a> -->
                     <a href="{{url_for('admins.report')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 hover:text-white hover:text-lg hover:shadow-lg duration-500 ">
                         Report</a>
                         {% if current_user.is_authenticated %}
@@ -159,7 +159,7 @@
                                     <path d="M3.86009 8.75255L9.3415 13.5488C9.98808 14.1145 11 13.6554 11 12.7962V3.20375C11 2.34459 9.98808 1.88541 9.3415 2.45117L3.86009 7.2474C3.40476 7.64581 3.40476 8.35414 3.86009 8.75255Z" fill="#828282"/>
                                 </svg>
                                 <span class="bg-gray-700 text-white text-sm rounded px-2 py-1">
-                                    Buyer Price
+                                    Seller Price
                                 </span>
                             </div>
                         </div>

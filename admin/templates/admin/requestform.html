@@ -43,14 +43,15 @@
                     </div>
 
                     <div class="grid grid-cols-3 ">
-                        {% set image = data.product_images.replace("}",'') %}
-                        {% set image_file = image[1:].split(',') %}
+                        {% set image_file = data.product_images.split(',') %}
                         {% for img in image_file %}
-                            <div class="">
-                            <img src="{{url_for('static',filename='products/%s'|format(img))}}" class="m-1 rounded-lg shadow-s hover:shadow-2xl">
-                            </div>
+                            {% if img != "" %}
+                                <div class="">
+                                <img src="{{url_for('static',filename='products/%s'|format(img))}}" class="m-1 rounded-lg shadow-s hover:shadow-2xl">
+                                </div>
+                            {% endif %}
                         {% endfor %}
-                        <input type="hidden" id="imagedata" value="{{image}}">
+                        <input type="hidden" id="imagedata" value="{{data.product_images}}">
                     </div>
                 </div>
 

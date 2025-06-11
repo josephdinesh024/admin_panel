@@ -8,14 +8,16 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 @login_manager.user_loader
 def load_user(id):
     # For Admin login
-    admin = Admin.query.get(id)
+    # for sqlite 
+    user_id = uuid.UUID(id)
+    admin = Admin.query.get(user_id)
     if admin:
         return admin
     # For Seller login
-    seller =  Seller.query.get(id)
+    seller =  Seller.query.get(user_id)
     if seller:
         return seller
-    return User.query.get(id)
+    return User.query.get(user_id)
 
 class User(db.Model,UserMixin):
     __bind_key__ = 'testdb'
