@@ -5,7 +5,7 @@ from admin import bcrypt, db, app
 from admin.models import Seller, Admin, Product, User
 from admin.sellers.forms import LoginFrom, SellerForm
 from admin.sellers.utils import save_document, send_otp_mail
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from itsdangerous import URLSafeTimedSerializer as Serializer
 
 seller = Blueprint('sellers',__name__)
 
@@ -32,7 +32,7 @@ def login():
             if not state:
                 otp = random.randint(1000,9999)
                 data = dict(email=seller.email_id,otp=otp)
-                s = Serializer(app.config['SECRET_KEY'],1800)
+                s = Serializer(app.config['SECRET_KEY'])
                 send_otp_mail(data)
                 return redirect(f"otp/{s.dumps(data).decode('utf-8')}/{str(seller.seller_id)}")
             
@@ -64,7 +64,7 @@ def registration():
 
         otp = random.randint(1000,9999)
         data = dict(email=forms.email.data,otp=otp)
-        s = Serializer(app.config['SECRET_KEY'],1800)
+        s = Serializer(app.config['SECRET_KEY'])
         send_otp_mail(data)
         return redirect(f"otp/{s.dumps(data).decode('utf-8')}/{seller.seller_id}")
 
